@@ -1,0 +1,54 @@
+# -------------------- Windows Event Logs --------------------
+[WinEventLog://Security]
+sourcetype = WinEventLog:Security
+index = windows_metrics
+
+[WinEventLog://System]
+sourcetype = WinEventLog:System
+index = windows_metrics
+
+[WinEventLog://Application]
+sourcetype = WinEventLog:Application
+index = windows_metrics
+
+# -------------------- Windows Sysmon Logs --------------------
+[WinEventLog://Microsoft-Windows-Sysmon/Operational]
+sourcetype = XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
+index = windows_metrics
+
+# -------------------- Windows Performance Monitoring --------------------
+[perfmon://CPU]
+object = Processor
+counters = % Processor Time
+instances = *
+interval = 10
+sourcetype = Perfmon:CPU
+index = windows_metrics
+
+[perfmon://Memory]
+object = Memory
+counters = Available MBytes
+interval = 10
+sourcetype = Perfmon:Memory
+index = windows_metrics
+
+[perfmon://Disk]
+object = PhysicalDisk
+counters = % Disk Time
+instances = *
+interval = 10
+sourcetype = Perfmon:Disk
+index = windows_metrics
+
+[perfmon://Network]
+object = Network Interface
+counters = Bytes Total/sec
+instances = *
+interval = 10
+sourcetype = Perfmon:Network
+index = windows_metrics
+
+# -------------------- Windows Syslog (if applicable) --------------------
+[monitor:///var/log/syslog]
+sourcetype = syslog
+index = windows_metrics
